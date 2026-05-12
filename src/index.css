@@ -1,0 +1,288 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Elegant nail salon design system with luxury aesthetics */
+
+@layer base {
+  :root {
+    /* Core brand colors */
+    --background: 120 22% 3%; /* #090D09 */
+    --foreground: 0 0% 98%;
+
+    /* Brand palette */
+    --brand-pink: 335 100% 69%; /* #FF62B1 */
+    --brand-dark-pink: 325 48% 41%; /* #842957 */
+    --brand-black: 120 22% 3%;
+
+    /* Component colors */
+    --card: 120 22% 4%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 120 22% 4%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 335 100% 69%;
+    --primary-foreground: 120 22% 3%;
+
+    --secondary: 325 48% 41%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 120 22% 8%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 335 100% 69%;
+    --accent-foreground: 120 22% 3%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 120 22% 15%;
+    --input: 120 22% 8%;
+    --ring: 335 100% 69%;
+
+    --radius: 1rem;
+
+    /* Custom design tokens */
+    --gradient-pink: linear-gradient(135deg, hsl(var(--brand-pink)), hsl(var(--brand-dark-pink)));
+    --gradient-dark: linear-gradient(180deg, hsl(var(--brand-black)), hsl(120 22% 5%));
+    --shadow-pink: 0 10px 30px -10px hsl(var(--brand-pink) / 0.3);
+    --shadow-elegant: 0 20px 40px -15px hsl(120 22% 0% / 0.4);
+
+    /* Typography */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Sidebar tokens (if used) */
+    --sidebar-background: 120 22% 4%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 335 100% 69%;
+    --sidebar-primary-foreground: 120 22% 3%;
+    --sidebar-accent: 120 22% 8%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 120 22% 15%;
+    --sidebar-ring: 335 100% 69%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  /* Hero button styles */
+  .btn-hero {
+    @apply bg-primary text-primary-foreground hover:opacity-90 transition-all duration-300;
+    box-shadow: var(--shadow-pink);
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Service card styles */
+  .service-card {
+    @apply bg-card border-2 border-primary/20 rounded-3xl overflow-hidden;
+    box-shadow: var(--shadow-elegant);
+    transition: all 0.3s ease;
+  }
+
+  .service-card:hover {
+    @apply border-primary/40 scale-105;
+    box-shadow: var(--shadow-pink);
+  }
+
+  /* Testimonial card styles */
+  .testimonial-card {
+    @apply relative overflow-hidden rounded-[28px] border border-primary/40 bg-primary text-primary-foreground p-6;
+    box-shadow: var(--shadow-pink);
+  }
+
+  .review-columns {
+    --review-mask-top: 160px;
+  }
+
+  .review-column {
+    @apply relative overflow-hidden;
+  }
+
+  .review-column::before,
+  .review-column::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 72px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .review-column::before {
+    top: 0;
+    height: clamp(96px, var(--review-mask-top, 160px), 360px);
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--background)) 0%,
+      hsl(var(--background)) 60%,
+      transparent 100%
+    );
+  }
+
+  .review-column::after {
+    bottom: 0;
+    background: linear-gradient(to top, hsl(var(--background)) 0%, transparent 100%);
+  }
+
+  /* Certificate card styles */
+  .certificate-card {
+    @apply bg-card border border-primary/30 rounded-2xl overflow-hidden;
+    box-shadow: var(--shadow-elegant);
+    transition: all 0.3s ease;
+  }
+
+  .certificate-card:hover {
+    @apply scale-105;
+    box-shadow: var(--shadow-pink);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: var(--gradient-pink);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Floating animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Scroll animations */
+  @keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-100px); opacity: 0; }
+    to   { transform: translateY(0);       opacity: 1; }
+  }
+
+  .animate-slide-up   { animation: slideUp 1s ease-out; }
+  .animate-slide-down { animation: slideDown 1s ease-out; }
+
+  /* Reviews marquee animation */
+  .review-marquee {
+    animation: review-marquee 28s linear infinite;
+    will-change: transform;
+  }
+  .review-marquee.reverse { animation-direction: reverse; }
+
+  @keyframes review-marquee {
+    0%   { transform: translateY(0%); }
+    100% { transform: translateY(-50%); } /* because we дублируем колонку */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .review-marquee {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
+}
+
+/* ----------------------------
+   Mobile global layout fix
+   Убираем горизонтальный скролл и
+   выравниваем мобилку по центру
+   (desktop не ломаем)
+----------------------------- */
+html, body, #root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;          /* безопаснее чем hidden: не ломает position: sticky */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;                 /* на всякий случай */
+}
+
+/* Любые «вылезающие» медиа не дадут горизонтальный скролл */
+img, video, canvas, svg {
+  max-width: 100%;
+}
+
+/* Контейнер по ширине экрана на мобиле + адекватные паддинги */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;   /* те же px, что и tailwind px-4 */
+    padding-right: 16px;
+  }
+}
+
+/* Иногда первопричина — элементы с фиксированной шириной больше вьюпорта.
+   Подстрахуем популярные кейсы: */
+[class*="w-["][class*="px-"] {
+  box-sizing: border-box;
+}
